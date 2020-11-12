@@ -109,8 +109,8 @@ def login(user, password):
 
     fcursor = bd.cursor()
 
-    fcursor.execute(
-        "SELECT password FROM login WHERE user ='" + user.get() + "' and password ='" + password.get() + "'")
+    fcursor.execute("""SELECT password FROM login WHERE user = %(user)s and password = %(password)s""",
+                    {"user": user.get(), "password": password.get()})
 
     if fcursor.fetchall():
         messagebox.showinfo("Inicio de Sesión Correcto!", message="Usuario y Contraseña Correcta")
